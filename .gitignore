@@ -1,2 +1,4 @@
 /testes
 *.o
+*Makefile
+.vscode
