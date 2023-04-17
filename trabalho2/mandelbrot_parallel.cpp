@@ -3,8 +3,9 @@
 #include <cmath>
 #include <omp.h>
 
-#define ITER 2000
+#define ITER 4000
 #define DIMEN 4000
+#define NUMTHREADS 2
 
 using namespace std;
 
@@ -21,7 +22,7 @@ int main()
     int bg_red = 255, bg_green = 255, bg_blue = 255; // define a cor de fundo branca
 
     
-    #pragma omp parallel for
+    #pragma omp parallel for num_threads(NUMTHREADS)
     for (int y = 0; y < height; ++y)
     {
         double c_im = y_min + (y * (y_max - y_min) / height);

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cmath>
 
-#define ITER 2000
+#define ITER 4000
 #define DIMEN 4000
 
 using namespace std;
