@@ -4,7 +4,7 @@
 #include <omp.h>
 
 #define ITER 2000
-#define DIMEN 2000
+#define DIMEN 4000
 
 using namespace std;
 
@@ -16,21 +16,21 @@ const double escape_radius = 2.0;
 int main()
 {
     ofstream img("mandelbrot_parallel.ppm");
-    img << "P3\n" << width << " " << height << "\n255 0 \n"; // define o cabeçalho PPM
+    // img << "P3\n" << width << " " << height << "\n255 0 \n"; // define o cabeçalho PPM
 
     int bg_red = 255, bg_green = 255, bg_blue = 255; // define a cor de fundo branca
 
     
+    #pragma omp parallel for
     for (int y = 0; y < height; ++y)
     {
         double c_im = y_min + (y * (y_max - y_min) / height);
 
         if (fabs(c_im) < 1e-6)
         {
-            c_im = 0.0; // converge to the real axis
+            c_im = 0.0;
         }
 
-        #pragma omp parallel for num_threads(10)
         for (int x = 0; x < width; ++x)
         {
             double c_re = x_min + (x * (x_max - x_min) / width);
@@ -53,7 +53,7 @@ int main()
 
             if (in_set)
             {
-                img << "255 255 255 "; // cor do pixel de fundo
+                // img << "255 255 255 "; // cor do pixel de fundo
             }
             else
             {
@@ -68,12 +68,12 @@ int main()
                     iter++;
                 }
                 if (iter == max_iter) {
-                    img << bg_red << " " << bg_green << " " << bg_blue << " ";
+                    // img << bg_red << " " << bg_green << " " << bg_blue << " ";
                 } else {
                     int red = (int)(255 * (iter % 64) / 63.0);
                     int green = (int)(255 * (iter % 32) / 31.0);
                     int blue = (int)(255 * (iter % 16) / 15.0);
-                    img << red << " " << green << " " << blue << " ";
+                    // img << red << " " << green << " " << blue << " ";
                 }
             }
         }

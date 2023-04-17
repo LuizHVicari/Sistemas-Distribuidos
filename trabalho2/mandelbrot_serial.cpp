@@ -3,7 +3,7 @@
 #include <cmath>
 
 #define ITER 2000
-#define DIMEN 2000
+#define DIMEN 4000
 
 using namespace std;
 
@@ -15,7 +15,7 @@ const double escape_radius = 2.0;
 int main()
 {
     ofstream img("mandelbrot_serial.ppm");
-    img << "P3\n" << width << " " << height << "\n255 0 \n"; // define o cabeçalho PPM
+    // img << "P3\n" << width << " " << height << "\n255 0 \n"; // define o cabeçalho PPM
 
     int bg_red = 255, bg_green = 255, bg_blue = 255; // define a cor de fundo branca
 
@@ -50,7 +50,7 @@ int main()
 
             if (in_set)
             {
-                img << "255 255 255 "; // cor do pixel de fundo
+                // img << "255 255 255 "; // cor do pixel de fundo
             }
             else
             {
@@ -65,12 +65,12 @@ int main()
                     iter++;
                 }
                 if (iter == max_iter) {
-                    img << bg_red << " " << bg_green << " " << bg_blue << " ";
+                    // img << bg_red << " " << bg_green << " " << bg_blue << " ";
                 } else {
                     int red = (int)(255 * (iter % 64) / 63.0);
                     int green = (int)(255 * (iter % 32) / 31.0);
                     int blue = (int)(255 * (iter % 16) / 15.0);
-                    img << red << " " << green << " " << blue << " ";
+                    // img << red << " " << green << " " << blue << " ";
                 }
             }
         }
