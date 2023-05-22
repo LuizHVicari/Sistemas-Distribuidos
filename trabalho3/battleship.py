@@ -14,6 +14,21 @@ class BattleShip():
         self.patrol_boat_pos = False
         self.rounds = list()
 
+    def read_matrix(self):
+        path = 'matrix.txt'
+        with open(path, 'r') as f:
+            lines = f.readlines()
+
+            matrix = []
+
+            for line in lines:
+                line = [int(i) for i in line.split()]
+                matrix.append(line)
+
+            matrix = np.array(matrix)
+            self.board = matrix
+            
+
     def position_carrier(self, ini, end, row, axis):
         if np.abs(ini - end) != 5 or self.carrier_pos:
             return False
@@ -110,7 +125,7 @@ class BattleShip():
     
 
     def is_valid(self, x, y):
-        return not ((x, y) in self.rounds or x > 9 or x < 0 or y < 0 or y > 8)
+        return not ((x, y) in self.rounds or x > 9 or x < 0 or y < 0 or y > 9)
 
     
     def target(self, x, y):
@@ -217,16 +232,18 @@ class BattleShip():
 
     def check_win(self):
         board = self.board.copy()
-        board = np.where(board == 1, board, 0)
-        return np.sum(board) == 17
+        board = np.where(board == 2, board, 0)
+        return np.sum(board) == 34
 
 
 if __name__ == '__main__':
 
     game = BattleShip()
-    game.print_board()
+    # game.print_board()
 
-    game.build_board()
+    # game.build_board()
+
+    game.read_matrix()
 
     while True:
         x, y = input('Informe o ponto do alvo, com valores separados por vírgula: ').split(',')

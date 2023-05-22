@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+
+service Target {
+  rpc SendBomb(TargetRequest) returns (TargetResponse) {}
+}
+message TargetRequest {
+  string x = 1;
+  string y = 2;
+}
+message TargetResponse {
+  string message = 1;
+  string board = 2;
+}
